@@ -6,7 +6,9 @@ import About from "./pages/about";
 import Portfolio from "./pages/portfolio";
 import Contact from "./pages/contact";
 import Extra from "./pages/Extra";
+import Auth from "./pages/auth";
 import Navigation from "./navigation/nav-links";
+
 
 export default class App extends Component {
   render() {
@@ -17,6 +19,7 @@ export default class App extends Component {
 
             <Switch>
               <Route exact path="/" component={Home} />
+              <Route exact path="/auth" component={Auth} />
               <Route path="/about" component={About} />
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/contact" component={Contact} />

@@ -23,6 +23,10 @@ const Navigation = () => {
             <NavLink to="/extra">
                 Extra   
             </NavLink>
+
+            <NavLink to="/auth">
+                Auth  
+            </NavLink>
         </div>
     )
 }
