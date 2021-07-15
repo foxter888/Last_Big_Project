@@ -1,5 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import { FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
 
 const Navigation = () => {
     return (
@@ -42,6 +44,12 @@ const Navigation = () => {
                         Auth
                     </NavLink>
                 </div>
+            </div>
+
+            <div className="right-side">
+                Paul Southworth
+
+                <FontAwesomeIcon icon="sign-out-alt"/>
             </div>
             
         </div>
