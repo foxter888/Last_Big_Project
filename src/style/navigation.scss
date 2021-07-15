@@ -4,13 +4,20 @@
     justify-content: space-between;
     padding: 30px;
 
-    
+    //added the margin in order to have a logo on top
+   // margin-top: 150px;
+
+   
     .right-side
     {
+
+        font-size: 2.05rem;
+
         a{
             margin-left: 15px;
             cursor: pointer;
             color: teal;
+            
             transition: 0.5s ease-in-out;
 
             &:hover
