@@ -9,14 +9,32 @@ class Contact extends Component {
 
 
                     <div className="bullet-point-group">
-
-                    
                         <div className="icon">
                             Phone Number:
                         </div>
 
                         <div className="text">
                             619-365-0942
+                        </div>
+                    </div>
+
+                    <div className="bullet-point-group">
+                        <div className="icon">
+                            Email:
+                        </div>
+
+                        <div className="text">
+                            paul.southworth888@yahoo.com
+                        </div>
+                    </div>
+
+                    <div className="bullet-point-group">
+                        <div className="icon">
+                            Location:
+                        </div>
+
+                        <div className="text">
+                            San Diego,Ca
                         </div>
                     </div>
 
