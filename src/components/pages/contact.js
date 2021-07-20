@@ -38,6 +38,17 @@ class Contact extends Component {
                         </div>
                     </div>
 
+                    <div className="bullet-point-group">
+                        <div className="icon">
+                            Facebook:
+                        </div>
+
+                        <div className="text">
+                            https://www.facebook.com/paul.southworth.10/
+                        </div>
+                    </div>
+
+
 
                 </div>
 
