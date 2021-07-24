@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 # encoding: utf-8
 import json
-from flask import Flask, request, jsonify
+#from flask import Flask, request, jsonify
 #from flask_mongoengine import MongoEngine
+
 
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
@@ -10,6 +11,7 @@ app.config['MONGODB_SETTINGS'] = {
     'host': 'localhost',
     'port': 27017
 }
+
 db = MongoEngine()
 db.init_app(app)
 
