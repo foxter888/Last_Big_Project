@@ -43,7 +43,7 @@ const Navigation = () => {
 
                 <div className="nav-link-wrapper">
                     <NavLink exact to="/auth" activeClassName="nav-link-active">
-                        Auth
+                        Login
                     </NavLink>
                 </div>
             </div>

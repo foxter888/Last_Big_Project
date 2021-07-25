@@ -18,12 +18,14 @@ export default class App extends Component {
       <div className='app'>
         <Router>
 
+        <div className="Links">
+                 
           <div className="logo">
-                  Paul Southworth
+            Paul Southworth
           </div>
 
           <Navigation/>
-
+            
             <Switch>
               <Route exact path="/" component={Home} />
               <Route path="/auth" component={Auth} />
@@ -32,6 +34,8 @@ export default class App extends Component {
               <Route path="/contact" component={Contact} />
               <Route path="/extra" component={Extra} />
             </Switch>
+
+        </div>
         </Router>
       </div>
     );
