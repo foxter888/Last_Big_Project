@@ -1,6 +1,20 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
+import axios from "axios";
 
+
+const handleSignOut = () => {
+axios.delete("https://api.devcamp.space/logout", {withCredentials: true}).then(response => {
+    if(response.status === 200) {
+    props.history.push("/");
+    props.handleSuccessfulLogout();
+    }
+    return response.data; 
+}).catch( error => {
+    console.log("error signing out", error);
+});
+
+};
 
 
 const Navigation = () => {
@@ -50,8 +64,12 @@ const Navigation = () => {
 
             <div className="right-side">
                 Paul Southworth
+                
+                <a onClick={handleSignOut}>Sign Out</a>
 
-                                   
+                
+                
+                                
             </div>
             
         </div>
