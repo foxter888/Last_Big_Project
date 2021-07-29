@@ -119,6 +119,7 @@ export default class App extends Component {
             <Switch>
               <Route exact path="/" component={Home} />
 
+              
               if(this.state.loggedInStatus != "LOGGED_IN")
               {
                 <Route path="/auth" component={Auth} />
@@ -127,6 +128,7 @@ export default class App extends Component {
               {
                 <Route exact path="/" component={Home}/>
               }
+              
               
               <Route path="/about" component={About} />
               <Route path="/portfolio" component={Portfolio} />
