@@ -4,6 +4,32 @@ from flask_marshmallow import Marshmallow
 import os
 
 app = Flask(__name__)
+basedir = os.path.abspath(os.path.dirname(__file__))
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'qpp.sqlite')
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+
+
+class Guide(db.Model):
+    id = db.column(db.Integer, primary_key= True)
+    title = db.column(db.String(100), unique = False)
+    content = db.column(db.String(144), unique = False)
+
+    def __init__(self, title, content):
+        self.title = title
+        self.content = content
+
+
+        
+class GuideSchema(ma.Schema):
+    class Meta:
+        fields = ('title', 'content')
+
+
+guide_schema = GuideSchema()
+guides_schema = GuideSchema(many=True)
+
+
 
 @app.route('/')
 def hello():
