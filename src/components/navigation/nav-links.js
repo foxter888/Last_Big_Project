@@ -1,7 +1,7 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
 import axios from "axios";
-
+import { BITrash } from "react-icons/bi"
 
 const handleSignOut = () => {
 axios.delete("https://api.devcamp.space/logout", {withCredentials: true}).then(response => {
@@ -65,7 +65,7 @@ const Navigation = () => {
             <div className="right-side">
                 Paul Southworth
                 
-                <a onClick={handleSignOut}>Sign Out</a>
+                <a onClick={handleSignOut}>Sign Out<BITrash/></a>
 
                 
                 
