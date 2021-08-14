@@ -65,7 +65,7 @@ const Navigation = () => {
             <div className="right-side">
                 Paul Southworth
                 
-                <a onClick={handleSignOut}>Sign Out<BITrash/></a>
+                <a onClick={handleSignOut}>Sign Out</a>
 
                 
                 

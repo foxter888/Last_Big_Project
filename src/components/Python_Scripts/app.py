@@ -1,63 +1,92 @@
-from flask import Flask, request, jsonify
-from flask_sqlalchemy import SQLAlchemy
-from flask_marshmallow import Marshmallow
-import os
+from flask import Flask, jsonify, request, Response
+from flask_pymongo import PyMongo
+from bson import json_util
+from bson.objectid import ObjectId
+import json
+
+from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-basedir = os.path.abspath(os.path.dirname(__file__))
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///' + os.path.join(basedir, 'qpp.sqlite')
-db = SQLAlchemy(app)
-ma = Marshmallow(app)
+
+app.secret_key = 'myawesomesecretkey'
+
+app.config['MONGO_URI'] = 'mongodb://localhost:27017/pythonmongodb'
+
+mongo = PyMongo(app)
 
 
-class Guide(db.Model):
-    id = db.Column(db.Integer, primary_key= True)
-    title = db.Column(db.String(100), unique = False)
-    content = db.Column(db.String(144), unique = False)
+@app.route('/users', methods=['POST'])
+def create_user():
+    # Receiving Data
+    username = request.json['username']
+    email = request.json['email']
+    password = request.json['password']
 
-    def __init__(self, title, content):
-        self.title = title
-        self.content = content
-
-
-        
-class GuideSchema(ma.Schema):
-    class Meta:
-        fields = ('title', 'content')
-
-
-guide_schema = GuideSchema()
-guides_schema = GuideSchema(many=True)
-
-# end point to create a new guide 
-@app.route('/guide', methods= ["POST"])
-def add_guide():
-    title = request.json['title']
-    content = request.json['content']
+    if username and email and password:
+        hashed_password = generate_password_hash(password)
+        id = mongo.db.users.insert(
+            {'username': username, 'email': email, 'password': hashed_password})
+        response = jsonify({
+            '_id': str(id),
+            'username': username,
+            'password': password,
+            'email': email
+        })
+        response.status_code = 201
+        return response
+    else:
+        return not_found()
 
 
-    new_guide = Guide(title, content)
-
-    db.session.add(new_guide)
-    db.session.commit()
-
-    guide = Guide.query.get(new_guide.id)
-
-    return guide_schema.jsonify(guide)
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = mongo.db.users.find()
+    response = json_util.dumps(users)
+    return Response(response, mimetype="application/json")
 
 
-# Endpoint to query all guides
-@app.route("/guides", methods=["GET"])
-def get_guides():
-    all_guides = Guide.query.all()
-    result = guides_schema.dump(all_guides)
-    return jsonify(result)
+@app.route('/users/<id>', methods=['GET'])
+def get_user(id):
+    print(id)
+    user = mongo.db.users.find_one({'_id': ObjectId(id), })
+    response = json_util.dumps(user)
+    return Response(response, mimetype="application/json")
 
 
-@app.route('/')
-def hello():
-    return "Hey Flask"
+@app.route('/users/<id>', methods=['DELETE'])
+def delete_user(id):
+    mongo.db.users.delete_one({'_id': ObjectId(id)})
+    response = jsonify({'message': 'User' + id + ' Deleted Successfully'})
+    response.status_code = 200
+    return response
 
 
-if __name__ == '__main__':
+@app.route('/users/<_id>', methods=['PUT'])
+def update_user(_id):
+    username = request.json['username']
+    email = request.json['email']
+    password = request.json['password']
+    if username and email and password and _id:
+        hashed_password = generate_password_hash(password)
+        mongo.db.users.update_one(
+            {'_id': ObjectId(_id['$oid']) if '$oid' in _id else ObjectId(_id)}, {'$set': {'username': username, 'email': email, 'password': hashed_password}})
+        response = jsonify({'message': 'User' + _id + 'Updated Successfuly'})
+        response.status_code = 200
+        return response
+    else:
+      return not_found()
+
+
+@app.errorhandler(404)
+def not_found(error=None):
+    message = {
+        'message': 'Resource Not Found ' + request.url,
+        'status': 404
+    }
+    response = jsonify(message)
+    response.status_code = 404
+    return response
+
+
+if __name__ == "__main__":
     app.run(debug=True)
