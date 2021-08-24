@@ -60,6 +60,13 @@ const Navigation = () => {
                         Login
                     </NavLink>
                 </div>
+
+
+                <div className="nav-link-wrapper">
+                    <NavLink exact to="/signup" activeClassName="nav-link-active">
+                        Sign Up
+                    </NavLink>
+                </div>
             </div>
 
             <div className="right-side">

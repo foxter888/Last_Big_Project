@@ -20,7 +20,7 @@ class About extends Component {
                     <h2 className="details__heading">Why I decided to be a web developer</h2>
                     <p className="details__paragraph">
                         I decided to start about web development due to a class I took from Platt College, it was a simple class and it taught me how to use html and css
-                        then after a few years i decided to go on ahead and start web development in which in turn i started the full stack class in Bottege Tech.
+                        then after a few years i decided to go on ahead and start web development in which in turn i started the full stack class in Bottega Tech.
                     </p>
                 </div>
 

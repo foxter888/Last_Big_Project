@@ -9,6 +9,7 @@ import Portfolio from "./pages/portfolio";
 import Contact from "./pages/contact";
 import Extra from "./pages/Extra";
 import Auth from "./pages/auth";
+import Signup from "./pages/signup";
 
 
 
@@ -134,6 +135,7 @@ export default class App extends Component {
               <Route path="/portfolio" component={Portfolio} />
               <Route path="/contact" component={Contact} />
               <Route path="/extra" component={Extra} />
+              <Route path="/signup" component={Signup} />
             </Switch>
 
         </div>
