@@ -8,7 +8,7 @@ from flask_mongoengine import MongoEngine
 app = Flask(__name__)
 app.config['MONGODB_SETTINGS'] = {
     'db': 'client.test',
-    'host': 'mongodb+srv://foxter888:<AIRborne888+++>@cluster0.dlvsg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
+    'host': 'mongodb+srv://user:<Pass>@cluster0.dlvsg.mongodb.net/myFirstDatabase?retryWrites=true&w=majority',
     'port': 27015
 }
 
